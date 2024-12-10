@@ -20,7 +20,7 @@ void HashTable::insertData(int data)
 {
     int dataKey = hashKey(data);// get the key for the data
     hashT[dataKey].push_back(data);// push the data into the list at the key
-    displayHashTable();// display the hash table after inserting the data
+    //displayHashTable();// display the hash table after inserting the data
 }
 
 void HashTable::displayHashTable()

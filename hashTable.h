@@ -19,4 +19,9 @@ public:
     void displayHashTable();
     bool findValue(int data);
     bool deleteData(int data);
+
+
+    void insertData_Multi(int data);
+    bool findValue_Multi(int data);
+    bool deleteData_Multi(int data);
 };

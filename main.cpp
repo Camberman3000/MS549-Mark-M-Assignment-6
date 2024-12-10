@@ -227,7 +227,7 @@ public:
         return true;// Success!
     }
     
-    void MenuChooseFile()
+    void MultipleValueOps(HashTable hashT)
     {
         /* Init nodes (allocate memory) */
         head = new DatNode<int>;
@@ -288,41 +288,135 @@ public:
 	 
         bool result = ImportFileContents(fileName);// Attempt to open file
         if (result)
-        {             
-            DisplayList();
-            
-            // auto start = chrono::high_resolution_clock::now();// Start high-res timer
-            // while (head != nullptr)
-            // {
-            //     Node* node = new Node(head->data);
-            //     insert(node->data);
-            //     head = head->next;
-            // }
-            //
-            // auto finish = chrono::high_resolution_clock::now();// Stop high-res timer
-            // auto microseconds = chrono::duration_cast<chrono::microseconds>(finish - start);// Get duration
-            // auto milliseconds = chrono::duration_cast<chrono::milliseconds>(finish - start);// Get duration
-            //              
-            // /*Display in micro-milli-seconds */		 
-            // if (microseconds.count() < 1000)
-            // {
-            //     cout << '\n' << '\n' << "Insert runtime: " << microseconds.count() << " Microseconds" << '\n';
-            // }            
-            // else
-            // {
-            //     
-            //     cout << '\n' << '\n' << "Insert runtime: " << milliseconds.count() << " Milliseconds" << '\n';
-            // }
-            
-            //cout << "\n\nIn-order Traversal: \n\n";
-            //inOrder();// Debug
-            //mainmenu();
+        {
+            execInsert(hashT);// Insert the data x number of times
+            execRetrieve(hashT);// Retrieve the data x number of times
+            execRemove(hashT);// Retrieve the data x number of times     
         }
     }
 
-    void mainmenu(HashTable hashT)
+    void execInsert(HashTable hashT)
     {
-      
+        /* INSERT DATA */            
+        auto start = chrono::high_resolution_clock::now();// Start high-res timer
+        DatNode<int>* current;// Create a local node var			
+
+        if (head->next == nullptr)//Only a single node in list
+        {
+            current = head;// Make current = head
+            //cout << current->data << " ";
+            hashT.insertData(current->data);
+        }
+        else// Multiple nodes in list
+        {
+            current = head;
+            while (current != nullptr)// While current val isn't nullptr
+            {
+                //cout << current->data << " ";
+                hashT.insertData(current->data);
+                current = current->next;// Assign to next in list				
+            }
+        }
+        auto finish = chrono::high_resolution_clock::now();// Stop high-res timer
+        auto microseconds = chrono::duration_cast<chrono::microseconds>(finish - start);// Get duration
+        auto milliseconds = chrono::duration_cast<chrono::milliseconds>(finish - start);// Get duration
+        hashT.displayHashTable();// display the hash table after inserting the data
+        /*Display in micro-milli-seconds */		 
+        if (microseconds.count() < 1000)
+        {
+            cout << '\n' << '\n' << "Insert runtime: " << microseconds.count() << " Microseconds" << '\n';
+        }            
+        else
+        {
+                
+            cout << '\n' << '\n' << "Insert runtime: " << milliseconds.count() << " Milliseconds" << '\n';
+        }
+        /* end INSERT DATA */
+    }
+    
+    void execRetrieve(HashTable hashT)
+    {
+        /* RETRIEVE DATA */            
+        auto start = chrono::high_resolution_clock::now();// Start high-res timer
+        DatNode<int>* current;// Create a local node var			
+
+        if (head->next == nullptr)//Only a single node in list
+        {
+            current = head;// Make current = head             
+            //hashT.insertData(current->data);
+            hashT.findValue(current->data);
+        }
+        else// Multiple nodes in list
+        {
+            current = head;
+            while (current != nullptr)// While current val isn't nullptr
+            {                 
+                //hashT.insertData(current->data);
+                hashT.findValue(current->data);
+                current = current->next;// Assign to next in list				
+            }
+        }
+        auto finish = chrono::high_resolution_clock::now();// Stop high-res timer
+        auto microseconds = chrono::duration_cast<chrono::microseconds>(finish - start);// Get duration
+        auto milliseconds = chrono::duration_cast<chrono::milliseconds>(finish - start);// Get duration
+        hashT.displayHashTable();// display the hash table after inserting the data
+        /*Display in micro-milli-seconds */		 
+        if (microseconds.count() < 1000)
+        {
+            cout << '\n' << '\n' << "Retrieve runtime: " << microseconds.count() << " Microseconds" << '\n';
+        }            
+        else
+        {
+                
+            cout << '\n' << '\n' << "Retrieve runtime: " << milliseconds.count() << " Milliseconds" << '\n';
+        }
+        /* end RETRIEVE DATA */
+    }
+
+    void execRemove(HashTable hashT)
+    {
+        /* REMOVE DATA */            
+        auto start = chrono::high_resolution_clock::now();// Start high-res timer
+        DatNode<int>* current;// Create a local node var			
+
+        if (head->next == nullptr)//Only a single node in list
+        {
+            current = head;// Make current = head
+            //cout << current->data << " ";
+            //hashT.insertData(current->data);
+            hashT.deleteData(current->data);
+        }
+        else// Multiple nodes in list
+        {
+            current = head;
+            while (current != nullptr)// While current val isn't nullptr
+            {
+                //cout << current->data << " ";
+                //hashT.insertData(current->data);
+                hashT.deleteData(current->data);
+                current = current->next;// Assign to next in list				
+            }
+        }
+        auto finish = chrono::high_resolution_clock::now();// Stop high-res timer
+        auto microseconds = chrono::duration_cast<chrono::microseconds>(finish - start);// Get duration
+        auto milliseconds = chrono::duration_cast<chrono::milliseconds>(finish - start);// Get duration
+        hashT.displayHashTable();// display the hash table after inserting the data
+        /*Display in micro-milli-seconds */		 
+        if (microseconds.count() < 1000)
+        {
+            cout << '\n' << '\n' << "Remove runtime: " << microseconds.count() << " Microseconds" << '\n';
+        }            
+        else
+        {
+                
+            cout << '\n' << '\n' << "Remove runtime: " << milliseconds.count() << " Milliseconds" << '\n';
+        }
+        /* end REMOVE DATA */
+    }
+
+    
+    void mainmenu(HashTable hashT)
+    {      
         int choice, value;
         bool bfoundValue = false;
 
@@ -331,7 +425,7 @@ public:
             cout << "1. Insert\n";
             cout << "2. Retrieve\n";
             cout << "3. Remove\n";           
-            cout << "4. Multiple Insert Menu\n";        
+            cout << "4. Multiple Value Operations Menu\n";        
             cout << "5. Display HashTable\n";        
             cout << "6. Exit\n";        
             cout << "Enter your choice: ";
@@ -341,7 +435,7 @@ public:
             case 1:
                 cout << "Enter value to insert: ";
                 cin >> value; 
-                hashT.insertData(value);// 50 = range for values (1-50)
+                hashT.insertData(value);// insert value
                 break;
             case 2:
                 cout << "Enter value to retrieve: ";
@@ -355,7 +449,7 @@ public:
             case 3:
                 cout << "Enter value to remove: ";
                 cin >> value;
-                bfoundValue = hashT.deleteData(value);
+                bfoundValue = hashT.deleteData(value);// delete value
                 if (bfoundValue)
                 {
                     cout << value << " has been removed.\n";
@@ -367,7 +461,7 @@ public:
                 break;            
             case 4:
                 cout << "Opening Dat menu...\n";
-                MenuChooseFile();
+                MultipleValueOps(hashT);
                 break;
             case 5:
                 cout << "Display HashTable\n";

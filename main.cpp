@@ -320,16 +320,16 @@ public:
         auto finish = chrono::high_resolution_clock::now();// Stop high-res timer
         auto microseconds = chrono::duration_cast<chrono::microseconds>(finish - start);// Get duration
         auto milliseconds = chrono::duration_cast<chrono::milliseconds>(finish - start);// Get duration
-        hashT.displayHashTable();// display the hash table after inserting the data
+        //hashT.displayHashTable();// display the hash table after inserting the data - DEBUG ONLY
         /*Display in micro-milli-seconds */		 
         if (microseconds.count() < 1000)
         {
-            cout << '\n' << '\n' << "Insert runtime: " << microseconds.count() << " Microseconds" << '\n';
+            cout << '\n' << "Insert runtime: " << microseconds.count() << " Microseconds";
         }            
         else
         {
                 
-            cout << '\n' << '\n' << "Insert runtime: " << milliseconds.count() << " Milliseconds" << '\n';
+            cout << '\n' << "Insert runtime: " << milliseconds.count() << " Milliseconds";
         }
         /* end INSERT DATA */
     }
@@ -359,16 +359,16 @@ public:
         auto finish = chrono::high_resolution_clock::now();// Stop high-res timer
         auto microseconds = chrono::duration_cast<chrono::microseconds>(finish - start);// Get duration
         auto milliseconds = chrono::duration_cast<chrono::milliseconds>(finish - start);// Get duration
-        hashT.displayHashTable();// display the hash table after inserting the data
+        //hashT.displayHashTable();// display the hash table after inserting the data - DEBUG ONLY
         /*Display in micro-milli-seconds */		 
         if (microseconds.count() < 1000)
         {
-            cout << '\n' << '\n' << "Retrieve runtime: " << microseconds.count() << " Microseconds" << '\n';
+            cout << '\n' << "Retrieve runtime: " << microseconds.count() << " Microseconds";
         }            
         else
         {
                 
-            cout << '\n' << '\n' << "Retrieve runtime: " << milliseconds.count() << " Milliseconds" << '\n';
+            cout << '\n' << "Retrieve runtime: " << milliseconds.count() << " Milliseconds";
         }
         /* end RETRIEVE DATA */
     }
@@ -400,16 +400,16 @@ public:
         auto finish = chrono::high_resolution_clock::now();// Stop high-res timer
         auto microseconds = chrono::duration_cast<chrono::microseconds>(finish - start);// Get duration
         auto milliseconds = chrono::duration_cast<chrono::milliseconds>(finish - start);// Get duration
-        hashT.displayHashTable();// display the hash table after inserting the data
+        //hashT.displayHashTable();// display the hash table after inserting the data - DEBUG ONLY
         /*Display in micro-milli-seconds */		 
         if (microseconds.count() < 1000)
         {
-            cout << '\n' << '\n' << "Remove runtime: " << microseconds.count() << " Microseconds" << '\n';
+            cout << '\n' << "Remove runtime: " << microseconds.count() << " Microseconds" << '\n';
         }            
         else
         {
                 
-            cout << '\n' << '\n' << "Remove runtime: " << milliseconds.count() << " Milliseconds" << '\n';
+            cout << '\n' << "Remove runtime: " << milliseconds.count() << " Milliseconds" << '\n';
         }
         /* end REMOVE DATA */
     }
@@ -440,7 +440,7 @@ public:
             case 2:
                 cout << "Enter value to retrieve: ";
                 cin >> value;
-                //if (search(value))
+                 
                 if (hashT.findValue(value))// find value
                     cout << value << " is in the table \n";
                 else

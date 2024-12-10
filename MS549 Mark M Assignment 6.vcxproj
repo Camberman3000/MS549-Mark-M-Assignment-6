@@ -25,6 +25,14 @@
   <ItemGroup>
     <ClInclude Include="hashTable.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataSets\num10.dat" />
+    <Content Include="DataSets\num100.dat" />
+    <Content Include="DataSets\num1000.dat" />
+    <Content Include="DataSets\num10000.dat" />
+    <Content Include="DataSets\num100000.dat" />
+    <Content Include="DataSets\num1000000.dat" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{1039DBC5-6085-4145-96EC-EAAE28A04ECE}</ProjectGuid>

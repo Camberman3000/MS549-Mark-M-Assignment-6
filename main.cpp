@@ -12,6 +12,8 @@
 #include <iomanip>
 #include<vector>
 #include <wtypes.h>
+#include <cstdlib>
+#include "hashTable.h"
 
 using namespace std;
 
@@ -24,10 +26,12 @@ struct Node {
     Node(int val) : data(val), left(nullptr), right(nullptr) {}
 };
 
-// Binary Search Tree class
-class BST
+// Hash table main class
+class HashMain
 {
 private:
+    
+    
     Node* root;
     
     Node* insert(Node* node, int value)
@@ -104,19 +108,22 @@ private:
         }
     }
 public:
-    BST() : root(nullptr) {}
+   
 
-    // Insert a value into the BST
+    
+    HashMain() : root(nullptr) {}
+
+    // Insert a value into the HashMain
     void insert(int value) {
         root = insert(root, value);
     }
 
-    // Search for a value in the BST
+    // Search for a value in the HashMain
     bool search(int value) const {
         return search(root, value);
     }
 
-    // Remove a value from the BST
+    // Remove a value from the HashMain
     void remove(int value) {
         root = remove(root, value);
     }
@@ -313,10 +320,11 @@ public:
         }
     }
 
-    void mainmenu()
+    void mainmenu(HashTable hashT)
     {
       
         int choice, value;
+        bool bfoundValue = false;
 
         do {
             cout << "\nHash Table Operations:\n";
@@ -324,20 +332,22 @@ public:
             cout << "2. Retrieve\n";
             cout << "3. Remove\n";           
             cout << "4. Multiple Insert Menu\n";        
-            cout << "5. Exit\n";        
+            cout << "5. Display HashTable\n";        
+            cout << "6. Exit\n";        
             cout << "Enter your choice: ";
             cin >> choice;
 
             switch (choice) {
             case 1:
                 cout << "Enter value to insert: ";
-                cin >> value;                 
-                insert(value);
+                cin >> value; 
+                hashT.insertData(value);// 50 = range for values (1-50)
                 break;
             case 2:
                 cout << "Enter value to retrieve: ";
                 cin >> value;
-                if (search(value))
+                //if (search(value))
+                if (hashT.findValue(value))// find value
                     cout << value << " is in the table \n";
                 else
                     cout << value << " was not found in the table \n";
@@ -345,29 +355,45 @@ public:
             case 3:
                 cout << "Enter value to remove: ";
                 cin >> value;
-                remove(value);
-                cout << value << " has been removed.\n";
+                bfoundValue = hashT.deleteData(value);
+                if (bfoundValue)
+                {
+                    cout << value << " has been removed.\n";
+                }
+                else
+                {
+                    cout << value << " was not found in the table.\n";
+                }
                 break;            
             case 4:
                 cout << "Opening Dat menu...\n";
                 MenuChooseFile();
                 break;
             case 5:
+                cout << "Display HashTable\n";
+                hashT.displayHashTable();
+                break;
+            case 6:
                 cout << "Exiting...\n";
                 break;        
             default:
                 cout << "Invalid choice! Please try again.\n";
             }
-        } while (choice != 5);
+        } while (choice != 6);
     }
     
-};// End of BST class
+};// End of HashMain class
 
 
 int main() {
+
+    /* Hash Table */
+    int numIndex = 100;  // # of indexes (arrays) in the hashtable
+    HashTable hashT_100(numIndex);// create a hash table with 100 indexes
+    /* end Hash Table */
    
-    BST bst;
-    bst.mainmenu();// Start the main menu
+    HashMain hash_main;
+    hash_main.mainmenu(hashT_100);// Start the main menu
 
     return 0;
 }
